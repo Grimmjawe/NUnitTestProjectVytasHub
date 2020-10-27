@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Interactions;
 using System;
 using System.Threading;
 
@@ -26,20 +25,11 @@ namespace NUnitTestProjectVytasHub
             driver.Url = test_url;
             driver.Navigate().GoToUrl("http://prelive.aptimea.com/form/questionnaire");
 
-            //IWebElement searchText = driver.FindElement(By.CssSelector("[name = 'q']"));
-            //searchText.SendKeys("LambdaTest");
-
-            IWebElement sButton2 = driver.FindElement(By.XPath("//button[@class='agree-button eu-cookie-compliance-secondary-button']"));
-            sButton2.Click();
-            
+            try { IWebElement sButton2 = driver.FindElement(By.XPath("//button[@class='agree-button eu-cookie-compliance-secondary-button']")); sButton2.Click(); } catch (Exception) { }
 
             for (int a = 0; a < 10; a++)
             {
                 Thread.Sleep(2500);
-
-
-
-
                 var sRadio = driver.FindElements(By.XPath("//div[@class='fieldset-wrapper']"));
                 for (int i = 0; i < sRadio.Count; i++)
                 {
@@ -49,10 +39,6 @@ namespace NUnitTestProjectVytasHub
                         try { els[_random.Next(0, els.Count)].Click(); } catch (Exception) { }
                     }
                 }
-
-
-
-
                 var sText = driver.FindElements(By.XPath("//input[@type='text']"));
                 for (int i = 0; i < sText.Count; i++)
                 {
@@ -76,7 +62,6 @@ namespace NUnitTestProjectVytasHub
                 IWebElement sButton = driver.FindElement(By.XPath("//*[@value='Suivant']"));
                 try { sButton.Click(); } catch (Exception) { }
             }
-
             Thread.Sleep(2500);
 
             IWebElement sButton3 = driver.FindElement(By.XPath("//*[@value='Finaliser']"));
@@ -91,23 +76,12 @@ namespace NUnitTestProjectVytasHub
 
             var sText1 = driver.FindElement(By.XPath("//input[@type='text']"));
             try { sText1.Click(); sText1.SendKeys("klassivend870@gmail.com"); } catch (Exception) { }
-
             var sText2 = driver.FindElement(By.XPath("//input[@type='password']"));
             try { sText2.Click(); sText2.SendKeys("123123"); } catch (Exception) { }
-
             Thread.Sleep(100);
-
             IWebElement sButton5 = driver.FindElement(By.XPath("//*[@value='Se connecter']"));
             try { sButton5.Click(); } catch (Exception) { }
-
-
-
-
-
-
-
-
-            Thread.Sleep(100000);
+            Thread.Sleep(1000000);
         }
         [TearDown]
         public void close_Browser()
